@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banking Interface</title>
+<link rel="stylesheet" href="./styles.css" />
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f0f4f8;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .bank-container {
+        background: #ffffff;
+        width: 90%;
+        max-width: 400px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        text-align: center;
+    }
+
+    h2 {
+        color: #2c3e50;
+    }
+
+    .balance {
+        font-size: 22px;
+        margin: 20px 0;
+        color: #27ae60;
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+    }
+
+    .btn-group {
+        display: flex;
+        gap: 10px;
+    }
+
+    button {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        color: white;
+    }
+
+    .deposit {
+        background-color: #2ecc71;
+    }
+
+    .withdraw {
+        background-color: #e74c3c;
+    }
+
+    button:hover {
+        opacity: 0.9;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+        h2 {
+            font-size: 20px;
+        }
+        .balance {
+            font-size: 18px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="bank-container">
+    <h2>My Bank</h2>
+
+    <div class="balance">
+        Balance: ₹<span id="balance">0</span>
+    </div>
+
+    <input type="number" id="amount" placeholder="Enter amount">
+
+    <div class="btn-group">
+        <button class="deposit" onclick="deposit()">Deposit</button>
+        <button class="withdraw" onclick="withdraw()">Withdraw</button>
+    </div>
+</div>
+
+<script>
+    let balance = 0;
+
+    function deposit() {
+        let amountInput = document.getElementById("amount");
+        let amount = Number(amountInput.value);
+
+        if (amount > 0) {
+            balance += amount;
+            document.getElementById("balance").innerText = balance;
+        }
+
+        amountInput.value = ""; // reset input
+    }
+
+    function withdraw() {
+        let amountInput = document.getElementById("amount");
+        let amount = Number(amountInput.value);
+
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            document.getElementById("balance").innerText = balance;
+        } else if (amount > balance) {
+            alert("Insufficient Balance!");
+        }
+
+        amountInput.value = ""; // reset input
+    }
+</script>
+
+</body>
+</html>
